@@ -103,8 +103,8 @@ Note that eventual consistency is a very loose guarantee, and is often coupled w
 
 
 
-**`Summary`**
-      1.    ╔═════════════╦══════════════╦══════════╦═════════╦══════════════╗
+      #### Summary
+      ╔═════════════╦══════════════╦══════════╦═════════╦══════════════╗
       ║             ║ Serializable ║ Eventual ║ Causal  ║ Quorum       ║
       ╠═════════════╬══════════════╬══════════╬═════════╬══════════════╣
       ║ Consistency ║ Highest      ║ Lowest   ║ Mid-way ║ Configurable ║
