@@ -39,6 +39,21 @@
 - This is the highest level of data consistency 
 - in this case we have high latency and low availability 
 - RAFT is a very intersting concept ![video](https://youtu.be/IujMVjKvWP4)
+        - At this consistency level, we want to show all changes in the database until the current read request. It means all changes which have happened in the database before the read operation will be reflected in the read query. 
+
+        For example, suppose initially we had x = 10. 
+
+        update x to 13 
+
+        update x to 17 
+
+        read x --> Returns 17
+
+        update x to 1 
+
+        read x --> Returns 1 
+
+       To achieve this we use a single-threaded single server. So every read-and-write request will always be ordered. Using the above example, the first read x will be executed after updating the value to 17. This is useful when systems need perfect consistency. 
 ### Eventual Consistency?
 - Here we can send a stale data for a read request lets say you send an email its in your outbox but its not in your sentbox thats a case of Eventual consistency
 - For achieving this we can process read and write requests parallely and conurrently
@@ -55,3 +70,42 @@ Note that eventual consistency is a very loose guarantee, and is often coupled w
    - So, if you write "Hello" on the board, no matter what your friend writes later, you won't see it. You'll only see your own "Hello" or something older. It's like freezing the board for you after you've written something, and you won't be bothered by your friend's newer messages.
 ### Causal Consistency?
 - [video ref](https://youtu.be/9YTDvPjWLLM)
+### Quorum
+- [Medium Article](https://medium.com/@sunny_81705/quorum-in-distributed-systems-37cbe17aae88)
+- Minimum number of nodes in cluster that must be online and be able to communicate with each other. If any additional node failure occurs beyond this threshold, cluster will stop running.
+- QUorum works on some kind of consensus in the distributed system 
+- Its also called as evetually consistent system 
+-  One piece of data is stored in multiple nodes. So we need some sort of mechanism so that nodes agree on a particular return value.
+
+    Need for quorum
+    Let's take an example,
+
+    Suppose we replicate the data on 3 nodes. Node 0,1 and 2.
+    We made a written request to node 0. Data is written on Node 0 and Node 1 and 2 are waiting for the data.
+    Meanwhile, we have a read request for the newly inserted data but Node 0 fails.
+    Since Node 0 fails it checks in Node 1 and 2. But the replicas are still not inserted in these nodes.
+    So our database sends a data not found error which is false.
+    Instead, the database should have sent database error.
+    To avoid such issues we need a distributed consensus and one way to implement that is through Quorum.
+
+    How does quorum work?
+    In quorum, if a particular number of nodes (which is called the Quorum factor) agree on a particular value that value is sent back.
+
+    If we have data on multiple nodes then we take the data with the latest timestamp (Timestamp is just one factor. You can choose any factor as per your use case). So even if one of our nodes fails users can still read the data.
+
+    Does quorum guarantee that the return value will always be correct? NO.
+
+    Considering the above example only. Suppose we have a quorum factor of 2. There are 3 participating nodes and 2 nodes agree that data does not exist (which is false).
+
+    If we have a Quorum factor of 3 then the query will fail.
+
+    So, low quorum factor provides more availability at the cost of consistency whereas high quorum factor provides more consistency but makes the system less available.
+`Summary`
+        ╔═════════════╦══════════════╦══════════╦═════════╦══════════════╗
+        ║             ║ Serializable ║ Eventual ║ Causal  ║ Quorum       ║
+        ╠═════════════╬══════════════╬══════════╬═════════╬══════════════╣
+        ║ Consistency ║ Highest      ║ Lowest   ║ Mid-way ║ Configurable ║
+        ╠═════════════╬══════════════╬══════════╬═════════╬══════════════╣
+        ║ Efficiency  ║ Lowest       ║ Highest  ║ Mid-way ║ Configurable ║
+        ╚═════════════╩══════════════╩══════════╩═════════╩══════════════╝
+    
