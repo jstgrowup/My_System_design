@@ -1,6 +1,6 @@
 # interviewReady.io
-### Fundamentals
-## Types of databases:Graph, TimeSeries and Object
+## Fundamentals
+### Types of databases:Graph, TimeSeries and Object
 1. `Graph` - Stores data internally as nodes and edges 
            Used to perform graph queries efficiently
            Some relationals databases are used as Graph databases it happens by creating an additional layer on top of the relational database , it enables users to perform graph operations in relational DB 
@@ -23,6 +23,6 @@
               - Cassandra (NoSQL)  
 3. `Object Oriented Databases`
 
-## What Database should you choose?
+### What Database should you choose?
 - Postgres has high consistency , durability , but in terms of availability it dosnt provide anything off the shelf if a postgres instance goes down than better 
 - cassandra is not that highly consistent 
