@@ -104,11 +104,11 @@ Note that eventual consistency is a very loose guarantee, and is often coupled w
 
 
 **`Summary`**
-        ╔═════════════╦══════════════╦══════════╦═════════╦══════════════╗
-        ║             ║ Serializable ║ Eventual ║ Causal  ║ Quorum       ║
-        ╠═════════════╬══════════════╬══════════╬═════════╬══════════════╣
-        ║ Consistency ║ Highest      ║ Lowest   ║ Mid-way ║ Configurable ║
-        ╠═════════════╬══════════════╬══════════╬═════════╬══════════════╣
-        ║ Efficiency  ║ Lowest       ║ Highest  ║ Mid-way ║ Configurable ║
-        ╚═════════════╩══════════════╩══════════╩═════════╩══════════════╝
+      1.    ╔═════════════╦══════════════╦══════════╦═════════╦══════════════╗
+      ║             ║ Serializable ║ Eventual ║ Causal  ║ Quorum       ║
+      ╠═════════════╬══════════════╬══════════╬═════════╬══════════════╣
+      ║ Consistency ║ Highest      ║ Lowest   ║ Mid-way ║ Configurable ║
+      ╠═════════════╬══════════════╬══════════╬═════════╬══════════════╣
+      ║ Efficiency  ║ Lowest       ║ Highest  ║ Mid-way ║ Configurable ║
+      ╚═════════════╩══════════════╩══════════╩═════════╩══════════════╝
     
