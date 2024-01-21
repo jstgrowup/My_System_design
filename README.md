@@ -26,3 +26,14 @@
 ### What Database should you choose?
 - Postgres has high consistency , durability , but in terms of availability it dosnt provide anything off the shelf if a postgres instance goes down than better 
 - cassandra is not that highly consistent 
+
+## Consistency in Distributed Systems
+### What is Data Consistency?
+- It is a measure of how up to date the data is inside a distributed system is 
+- If you get a stale data or an inconsistent data than we call it a weakly consistent system 
+   - Why Consistency is important?
+     - Easier to understand
+     - User experience (lets say if i like a post and i refresh i should be seeing the updated like count)
+     
+### Linearizable Consistency?
+- 
