@@ -102,8 +102,8 @@ Note that eventual consistency is a very loose guarantee, and is often coupled w
     So, low quorum factor provides more availability at the cost of consistency whereas high quorum factor provides more consistency but makes the system less available.
 
 
-    
-`Summary`
+
+**`Summary`**
         ╔═════════════╦══════════════╦══════════╦═════════╦══════════════╗
         ║             ║ Serializable ║ Eventual ║ Causal  ║ Quorum       ║
         ╠═════════════╬══════════════╬══════════╬═════════╬══════════════╣
