@@ -111,4 +111,24 @@ Note that eventual consistency is a very loose guarantee, and is often coupled w
       ╠═════════════╬══════════════╬══════════╬═════════╬══════════════╣
       ║ Efficiency  ║ Lowest       ║ Highest  ║ Mid-way ║ Configurable ║
       ╚═════════════╩══════════════╩══════════╩═════════╩══════════════╝
-    
+
+
+### Transaction Isolation Levels - Read Uncommitted Data
+- It is more specific consistency talks about multiple transactions whereas Trasactions talks about a single transaction
+- Begin and commit are an indication for the DB to register that there is transaction happening on it 
+- Isolation:
+   If two transactions are running concurrently and queries in one transaction do not affect the other transaction then the two transactions are said to be isolated from each other. 
+- Transaction isolation levels are a measure of hte extent to which transaction isolation succeeds
+   *Dirty Reads* :
+      Imagine you have two people (transactions), and one person is updating some information.
+      The other person checks that information before the first person finishes making changes.
+      If the first person decides to cancel the update, the second person ends up reading information that never really got confirmed or saved.
+   *Nonrepeatable Reads*:
+      Picture a person reading a book (a row in a database).
+      Another person comes and changes the content of that book, and then the first person reads it again.
+      The problem is, the second time they read it, the information is different or, worse, the book is deleted. It's like reading a book that keeps changing or disappears.
+   *Phantoms*:
+      Think of a person searching for a specific type of item in a store (a set of rows in a database).
+      While this person is looking for items, the store clerk (another transaction) adds new items that fit the search criteria.
+      When the first person searches again, they find items that weren't there before. These "new" items are like phantoms – they appeared out of nowhere.
+- In summary, these concepts are about problems that can happen when multiple actions (transactions) are taking place at the same time in a database. Dirty reads involve reading unconfirmed changes, nonrepeatable reads involve reading different information over time, and phantoms involve finding things in a search that weren't there before due to new additions. Transaction isolation levels help manage these issues to ensure data consistency and reliability in a database.
