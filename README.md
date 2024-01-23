@@ -155,4 +155,26 @@ Note that eventual consistency is a very loose guarantee, and is often coupled w
 - A phantom read occurs when two identical read queries are executed and the collection of rows returned by the second query is different from the first . It is different from non-repeatable reads because in phantom reads the change in the value can be due to the insertion of a new row 
 ### Conclusion Transaction Isolation
 - ![Image](https://github.com/jstgrowup/My_System_design/assets/40628582/24ad653f-1129-4df8-96b2-0040e9b351d0)
-- [pdf](https://d3ivphvzw9pbeo.cloudfront.net/consistency-in-distributed-system.pdf?Expires=1706065998&Signature=QfEMMQM1vMbJySJBs4DzM03rWv7w2qweqsUSSYzdwbWeS6cxfNxQE4fRWC3Tc3x~0g3JKfGfEY0~cd9aNNIrsgm4auZ9KwGAzRR8wE7q44aOIgGNfNJnL1Q~epsIo~~-jWgiMM1CwE8PR9szJDRz0Rm0kze7WsXWRC9HR2I6zFT5jKh3ZezOq0iWvG2JPqwawEYRLnP51fZ3nFTy50sNVbXaDBR-bozRB9PwWxE5hIM330fqegjTnGRQtxBo1ntLEJogv1Dn8u5Yia0NdXvbNyW~pO5x0Mmo9ra8vxwXTaMa2hshukShNFmRPqmv7wO5LZmGx9S4d2DzuS75LbAfcw__&Key-Pair-Id=K2UERR4YIMY56O)
+- [Summary](https://d3ivphvzw9pbeo.cloudfront.net/consistency-in-distributed-system.pdf?Expires=1706065998&Signature=QfEMMQM1vMbJySJBs4DzM03rWv7w2qweqsUSSYzdwbWeS6cxfNxQE4fRWC3Tc3x~0g3JKfGfEY0~cd9aNNIrsgm4auZ9KwGAzRR8wE7q44aOIgGNfNJnL1Q~epsIo~~-jWgiMM1CwE8PR9szJDRz0Rm0kze7WsXWRC9HR2I6zFT5jKh3ZezOq0iWvG2JPqwawEYRLnP51fZ3nFTy50sNVbXaDBR-bozRB9PwWxE5hIM330fqegjTnGRQtxBo1ntLEJogv1Dn8u5Yia0NdXvbNyW~pO5x0Mmo9ra8vxwXTaMa2hshukShNFmRPqmv7wO5LZmGx9S4d2DzuS75LbAfcw__&Key-Pair-Id=K2UERR4YIMY56O)
+
+## Caches Deep Dive
+### Caching: Basics
+*Benefits oF a cache*
+     1. Saves network calls
+     2. Avoids repeated conputaions
+     3. Reduces DB load
+*Drawbacks of a cache*
+     1. Can be expensive (cache reads from SSD)
+     2. Potential thrashing is like loading the data into the cache 
+*Cache policies*
+       - cache performance depends on the Cache policy its like a rule for evicting as well as put the data into the cache
+       1. LRU(Least recently Used) 
+       - whenever you have to put the data into the cache you put the recent ones like seconds ago
+       - when you want to evict the data from the cache you delete from the last or from the end the old ones
+       - celebrity comments example
+       2. LFU(least frequently Used)
+
+If I have a poor eviction policy than what happens  is i make a unncessary call for the cache which is not even there than i go the the DB to get the data 
+ `consistency in a distributed system` : so lets say there is a user profile and i have two servers so he changes the password through server 2 but whil e getting he got the data from the server 1 cache which is outdated
+
+### Caching: Global vs. Local Cache
