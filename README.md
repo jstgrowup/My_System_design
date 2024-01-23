@@ -114,16 +114,23 @@ Note that eventual consistency is a very loose guarantee, and is often coupled w
 
 
 ### Transaction Isolation Levels - Read Uncommitted Data
+- Stages of transaction
+      *BEGIN* Marks the start of the transaction.
+      *COMMIT* Marks the end of the transaction, which results in the changes persisting to the database.
+      *ROLLBACK* Marks the end of the transaction and undoes all the changes to the database.
+
+
+
 - It is more specific consistency talks about multiple transactions whereas Trasactions talks about a single transaction
 - Begin and commit are an indication for the DB to register that there is transaction happening on it 
 - Isolation:
    If two transactions are running concurrently and queries in one transaction do not affect the other transaction then the two transactions are said to be isolated from each other. 
-- Transaction isolation levels are a measure of hte extent to which transaction isolation succeeds
+- Transaction isolation levels are a measure of the extent to which transaction isolation succeeds
    *Dirty Reads* :
       Imagine you have two people (transactions), and one person is updating some information.
       The other person checks that information before the first person finishes making changes.
       If the first person decides to cancel the update, the second person ends up reading information that never really got confirmed or saved.
-   *Nonrepeatable Reads*:
+   *Nonrepeatable Reads* :
       Picture a person reading a book (a row in a database).
       Another person comes and changes the content of that book, and then the first person reads it again.
       The problem is, the second time they read it, the information is different or, worse, the book is deleted. It's like reading a book that keeps changing or disappears.
@@ -132,3 +139,19 @@ Note that eventual consistency is a very loose guarantee, and is often coupled w
       While this person is looking for items, the store clerk (another transaction) adds new items that fit the search criteria.
       When the first person searches again, they find items that weren't there before. These "new" items are like phantoms – they appeared out of nowhere.
 - In summary, these concepts are about problems that can happen when multiple actions (transactions) are taking place at the same time in a database. Dirty reads involve reading unconfirmed changes, nonrepeatable reads involve reading different information over time, and phantoms involve finding things in a search that weren't there before due to new additions. Transaction isolation levels help manage these issues to ensure data consistency and reliability in a database.
+- here lets say we have a like count and we are reading the uncommited transactions as well in that case we have higher level of isolation for lower level of efficiency
+
+### Read Commited
+- At this isolation level, one transaction can only read committed data from other transactions.
+- An example would be a movie theater booking system . Reading committed data would be appropriate while booking seats since we ensure that a seat is only counted as booked once the transaction has been committed
+- [video](https://youtu.be/-gxyut1VLcs)
+### Repeatable Commited
+- 
+### Serializable Isolation Level
+- This is the highest level of isolation 
+- At this level all transactions are executed serially
+- All of the operations are executed serially or every operation is ensured to not meddle with the operations of other transactions
+- we use this isolation level when we want to avoid Phantom reads
+- A phantom read occurs when two identical read queries are executed and the collection of rows returned by the second query is different from the first . It is different from non-repeatable reads because in phantom reads the change in the value can be due to the insertion of a new row 
+### Conclusion Transaction Isolation
+- ![Image](https://github.com/jstgrowup/My_System_design/assets/40628582/24ad653f-1129-4df8-96b2-0040e9b351d0)
