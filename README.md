@@ -175,6 +175,7 @@ Note that eventual consistency is a very loose guarantee, and is often coupled w
        2. LFU(least frequently Used)
 
 If I have a poor eviction policy than what happens  is i make a unncessary call for the cache which is not even there than i go the the DB to get the data.
- `consistency in a distributed system` : so lets say there is a user profile and i have two servers so he changes the password through server 2 but whil e getting he got the data from the server 1 cache which is outdated
+
+*`consistency in a distributed system`* : so lets say there is a user profile and i have two servers so he changes the password through server 2 but whil e getting he got the data from the server 1 cache which is outdated
 
 ### Caching: Global vs. Local Cache
