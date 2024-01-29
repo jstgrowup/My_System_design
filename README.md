@@ -179,3 +179,9 @@ If I have a poor eviction policy than what happens  is i make a unncessary call 
 *`consistency in a distributed system`* : so lets say there is a user profile and i have two servers so he changes the password through server 2 but whil e getting he got the data from the server 1 cache which is outdated
 
 ### Caching: Global vs. Local Cache
+- As we know that a cache is an in memory in server thing so what ever we store in the cache its the servers own memory that is being consumed 
+- Now if lets say we have one of the system goes down than the cache is also gone and there is an issue of the consistency in the servers cache 
+- to solve these issues the concept of Global cache came where we build an another system which will be only cache and the servers will query from that cache server rather than hitting the database 
+-  but if still want your query time to be less than better to make local cache 
+### Global cache (a distributed system)
+- 
