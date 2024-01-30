@@ -184,4 +184,16 @@ If I have a poor eviction policy than what happens  is i make a unncessary call 
 - to solve these issues the concept of Global cache came where we build an another system which will be only cache and the servers will query from that cache server rather than hitting the database 
 -  but if still want your query time to be less than better to make local cache 
 ### Global cache (a distributed system)
-- 
+- Global Cache 
+### Write Policies: Write Back Policy
+- so how do we maintain the consistency in cache 
+   - `Write policy`
+     - whenever we make a write request into the cache , this means some entry has been updated , deleted or added  in the cache 
+     - A write policy is triggered when there is a write operation in the cache. Keep in mind that it is different from the replacement policy. A replacement policy is triggered when there is no space for a new key and a key is evicted from the cache. 
+     - A write request means some entry is added, updated or deleted in the cache. But because a cache is a source of truth each of the write requests will impact the entire system.
+     `Types of write requests`
+     1. Create
+     2. Delete
+     3. Update
+   - `Write-back Policy`
+     
