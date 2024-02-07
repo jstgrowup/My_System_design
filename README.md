@@ -196,4 +196,31 @@ If I have a poor eviction policy than what happens  is i make a unncessary call 
      2. Delete
      3. Update
    - `Write-back Policy`
-     
+     - so now we have a cache and a database
+     - here the requests goes to the cache first 
+     - lets say we an update request
+     - we have {{key:1,value:20},{key:2,value:30}}
+     - and i want to update the key 1 to 30
+     - now it will first check if the data exists in the cache or not
+     - here one of the write policies kicks in which is known as `write-back`
+     - so there will be a stale value which will contain key 1 as 20 and the cache will be updated as 30
+     - now if i make a read request it will return me 30 
+     - but the issue is lets say for some reason if my cache is down than i will hit the database and it will return me the stale data   which is still 20
+     - it is consistent as long as my cache is running, if my cache is down its not persistent
+     - one way that we can solve this issue is by having a timestamp based approach
+     - lets say we have the timestamp of 50 for the key 1 and there is a read request and it finds that now the current time is 54 which is greter than 50 and it will update the database
+     - here the database is eventually consistent
+   Here the cache is the source of truth and it is eventually consistent 
+   write back is helpfull when you want efficient caching and you are okay with persistence being not 100%
+   ![link](https://www.baeldung.com/cs/cache-write-policy)
+   - `Write through Policy`
+     - Here let say i have key 1 value as 10 in my cahche and i am sending a write request of 1 as 30 now it will kick out my entry of 1 as 10 from my cache and update 1 as 30 in my database and send the response directly 
+     - now whenever there is a read request the DB will update the cache and cahche will send the response back to the user 
+     - it provides high level of persistency and high level of persistence but not efficient
+     - However, we can run into problems when using this policy.
+       - For example, Initially, we have X = 10 There is a write request for X = 20
+       - Then there is a read request for X, but the write request is not updated yet. So the read request returns X = 10 . So it can cause inconsistency.
+   - `Write around policy`
+     - In this policy, when we get a write request, instead of updating the entry in the cache, we update the entry in the database. Now when we get a read request, we will send the stale value from the cache. And we will be getting stale values until the entry is evicted from the cache. This policy is useful When we need a high level of efficiency When we need a high level of persistence However, it makes our system eventually consistent.
+     - here we give some TTL or may be something like a count in the ready requests so if we make 4 read requests thats when we update teh cache with the data from DB 
+   - `Replacement Po`
