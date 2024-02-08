@@ -223,4 +223,17 @@ If I have a poor eviction policy than what happens  is i make a unncessary call 
    - `Write around policy`
      - In this policy, when we get a write request, instead of updating the entry in the cache, we update the entry in the database. Now when we get a read request, we will send the stale value from the cache. And we will be getting stale values until the entry is evicted from the cache. This policy is useful When we need a high level of efficiency When we need a high level of persistence However, it makes our system eventually consistent.
      - here we give some TTL or may be something like a count in the ready requests so if we make 4 read requests thats when we update teh cache with the data from DB 
-   - `Replacement Po`
+### Replacement Policies
+     - lets say your cache gets a read request in your cache you can only see hte value 2 and 3 so 1 does not exist which is known as cache miss therefore you have to go to database and pickup the entry 1 when you want to populate your cache you see there is only two entries
+     - what we are supposed to do is remove one entry and allow one entry to come in this is known as a replacement and the way in which we decide which key to remove is known as a replacement policy.
+
+   `Replacement policies`
+   1. Least Recently Used : Here we kickout the entry which is least recent in terms of usage so along with the key and value we have to store the last used value (LU) which will be the timestamp
+   `Least Frequently used`
+   1. as the name says whenever we have to kick out an entry we kick out the least fequently used so we need a counter for the operations we store the frequency for when its used and teh least one will be kicked out
+   2. here comes the concept of `Thrashing` here we a continously loading and evicting the cache and we have a high miss ratio 
+   3. we need a cache which has a high hit ratio for that ingeneral we implement least recently used in general 
+   `Amazon Memcached`
+   - here basically we have two tables warm and cold so lets say i have a read request for 1 there the database will pull the 1 entry and put it into the cold table now lets say we have again a read request for 1 now this entry wll be promoted to warm table 
+   ![Image](https://github.com/jstgrowup/My_System_design/assets/40628582/8e10882f-1010-430d-a94c-a30dac80c6fe)
+   
