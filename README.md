@@ -236,4 +236,10 @@ If I have a poor eviction policy than what happens  is i make a unncessary call 
    `Amazon Memcached`
    - here basically we have two tables warm and cold so lets say i have a read request for 1 there the database will pull the 1 entry and put it into the cold table now lets say we have again a read request for 1 now this entry wll be promoted to warm table 
    ![Image](https://github.com/jstgrowup/My_System_design/assets/40628582/8e10882f-1010-430d-a94c-a30dac80c6fe)
-   
+## Network Deep Dive
+### The Physical Layer
+- The physical layer defines the means of transmitting a stream of raw bits[2] over a physical data link connecting network nodes.
+- The physical layer consists of the electronic circuit transmission technologies of a network.[3] It is a fundamental layer underlying the higher level functions in a network, and can be implemented through a great number of different hardware technologies with widely varying characteristics
+- the physical layer translates logical communications requests from the data link layer into hardware-specific operations to cause transmission or reception of electronic (or other) signals.
+- In the seven-layer OSI model of computer networking, the physical layer or layer 1 is the first and lowest layer
+- The physical layer consists of the basic networking hardware transmission technologies of a network. It is a fundamental layer underlying the logical data structures of the higher level functions in a network
