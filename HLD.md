@@ -45,4 +45,10 @@
 ## Login
 
 - Every request i am sending that should be authenticated
+- if i login and i send an un authenticated request
+- when i login the server should give me a secret key and for every request i will give you the key and you will allow me to access everything
+- i will make a table which will have the user_id and token and the time at which token was created
+- will use a JWT token
+- in every request we will send the token and on every request it will validate if the token is the same as the stored token
+- the token and the userId table we will cache in the gateway
 -
